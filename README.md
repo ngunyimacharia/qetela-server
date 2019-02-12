@@ -32,19 +32,23 @@ Run the  application with the default settings  http:127.0.0.1:8000 by runnning 
 ##### CSS Frameworks
 
 [SASS](https://sass-lang.com/)
+
 Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
 
 [Bulma](https://bulma.io)
+
 Bulma is a free, open source CSS framework based on Flexbox and used by more than 150,000 developers.
 
 ##### Front-End Frameworks
 [VueJs](https://vuejs.org/)
+
 The Progressive JavaScript Framework
 
 
 
 ##### Back-End Frameworks
 [Django](https://www.djangoproject.com/)
+
 Django makes it easier to build better Web apps more quickly and with less code.
 
 ## License
