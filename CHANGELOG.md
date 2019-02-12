@@ -10,5 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG.md added to project
 - .gitignore file to ignore unecessary files
 - Initial migration files generated
+- Accounts app created and added
+- README.md initialized
 
 [Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...HEAD
