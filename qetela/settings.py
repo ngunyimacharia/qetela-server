@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #included apps
+    'graphene_django',
+
     #custom applications
     'account.apps.AccountConfig',
-    'organisations.apps.OrganisationsConfig',
+    'organisations',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#Below here are our own customisations to this file
+#Let's set where the schema lives
+GRAPHENE = {
+    'SCHEMA': 'qetela.schema.schema'
+}
