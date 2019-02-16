@@ -40,8 +40,10 @@ INSTALLED_APPS = [
 
     #included apps
     'graphene_django',
+    'django_nose',
 
     #custom applications
+    'seeder',
     'account.apps.AccountConfig',
     'organisations',
 ]
@@ -132,3 +134,13 @@ STATIC_URL = '/static/'
 GRAPHENE = {
     'SCHEMA': 'qetela.schema.schema'
 }
+
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=seeder,organisations,account',
+]

@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from .models import Organisation
+from .seeder import gen_organisastion
 from qetela.schema import schema
 
 def initialize():
@@ -151,3 +152,8 @@ class OrganisationGraphTests(TestCase):
         result = schema.execute(mutation)
         assert not result.errors
         assert result.data == expected
+
+class OrganisationSeederTest(TestCase):
+    def test_seeder(self):
+        gen_organisastion(10)
+        assert Organisation.objects.all().count() == 10
