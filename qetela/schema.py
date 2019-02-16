@@ -1,5 +1,6 @@
 import graphene
-from organisations.schema import OrganisationQueries, OrganisationMutations
+from organisations.queries import OrganisationQueries
+from organisations.mutations import OrganisationMutations
 
 class Query(OrganisationQueries, graphene.ObjectType):
     pass

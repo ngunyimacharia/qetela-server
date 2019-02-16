@@ -1,36 +1,23 @@
 from organisations.models import Organisation as OrganisationModel
-from graphene_django.types import DjangoObjectType
 import graphene
 
-class Organisation(DjangoObjectType):
-    class Meta:
-        model = OrganisationModel
-
-
-class OrganisationQueries(graphene.ObjectType):
-    organisation = graphene.Field(Organisation,id=graphene.ID(required=True))
-    organisations = graphene.List(Organisation)
-
-    def resolve_organisation(self, info, **kwargs):
-        id = kwargs.get('id')
-        if id is not None:
-            return OrganisationModel.objects.get(pk=id)
-        return None
-
-    def resolve_organisations(self, info, **kwargs):
-        return OrganisationModel.objects.all()
-
 class CreateOrganisationMutation(graphene.Mutation):
+    id = graphene.Int()
     name = graphene.String()
     website = graphene.String()
     branches = graphene.Boolean()
     cf_frequency = graphene.Int()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
 
     class Arguments:
+        id = graphene.Int()
         name = graphene.String(required=True)
         website = graphene.String()
         branches = graphene.Boolean()
         cf_frequency = graphene.Int()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
 
     def mutate(self, info, name, **org_data):
         website = org_data.get('website', None)
@@ -38,7 +25,7 @@ class CreateOrganisationMutation(graphene.Mutation):
         cf_frequency = org_data.get('cf_frequency', 7)
         organisation = OrganisationModel(name=name,website=website,branches=branches,cf_frequency=cf_frequency)
         organisation.save()
-        return CreateOrganisationMutation(name=name,website=website,branches=branches,cf_frequency=cf_frequency)
+        return CreateOrganisationMutation(id=organisation.id,name=organisation.name,website=organisation.website,branches=organisation.branches,cf_frequency=organisation.cf_frequency,created=organisation.created,updated=organisation.updated)
 
 
 class UpdateOrganisationMutation(graphene.Mutation):
@@ -47,6 +34,8 @@ class UpdateOrganisationMutation(graphene.Mutation):
     website = graphene.String()
     branches = graphene.Boolean()
     cf_frequency = graphene.Int()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
 
     class Arguments:
         id = graphene.Int(required=True)
@@ -54,6 +43,8 @@ class UpdateOrganisationMutation(graphene.Mutation):
         website = graphene.String()
         branches = graphene.Boolean()
         cf_frequency = graphene.Int()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
 
     def mutate(self, info, id, **org_data):
 
@@ -64,7 +55,7 @@ class UpdateOrganisationMutation(graphene.Mutation):
 
         organisation.save()
 
-        return UpdateOrganisationMutation(id=id,name=organisation.name,website=organisation.website,branches=organisation.branches,cf_frequency=organisation.cf_frequency)
+        return UpdateOrganisationMutation(id=id,name=organisation.name,website=organisation.website,branches=organisation.branches,cf_frequency=organisation.cf_frequency,created=organisation.created,updated=organisation.updated)
 
 
 class DeleteOrganisationMutation(graphene.Mutation):
