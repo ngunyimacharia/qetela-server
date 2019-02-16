@@ -1,0 +1,25 @@
+language: python # => 1
+
+    python: # => 2
+
+      - "2.6"
+
+      - "3.6"
+
+    services: # => 3
+
+      - mongodb
+
+    env: # => 4
+
+      -DJANGO=2.1 DB=mongo
+    install: # => 5
+
+      - pip install -r requirements.txt
+
+    before_script: # => 6
+      - sleep 15
+      - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+    script: # => 7
+
+      - python manage.py test

@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+ - Organisation app created and added to admin
+ - GraphQL integrated
+ - GraphQL Queries and mutations for organisation CRUD implemented
+ - MongoDB integrated
+ - Seeder command created and implemented for organisation model
+ - Added requirements.txt
+ - Coverage integrated to show test coverage
+ - Travis CI added
 
 ## 0.0.0 - 2019-02-12
 
@@ -17,4 +26,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README.md initialized
 - License added
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.0...HEAD
+[Unreleased]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.0...HEAD
