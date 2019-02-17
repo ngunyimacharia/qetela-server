@@ -11,8 +11,6 @@ node {
             slackSend color: "warning", message: "Started `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n_The changes:_\n${lastChanges}"
 
         stage 'Test'
-          sh 'cd /root/qetela-server/reports'
-          sh 'touch *.xml'
           sh 'export DJANGO_SETTINGS_MODULE=qetela.settings.dev'
           sh 'virtualenv -p python3 qetelaenv'
           sh 'source qetelaenv'
