@@ -15,7 +15,7 @@ node {
           sh 'virtualenv -p python3 qetelaenv'
           sh '. qetelaenv/bin/activate'
           sh 'qetelaenv/bin/pip install -r requirements.txt'
-          sh 'qetelaenv/bin/python3 manage.py test
+          sh 'qetelaenv/bin/python3 manage.py test'
 
         stage 'Deploy'
             sh './deployment/deploy_prod.sh'
