@@ -11,13 +11,13 @@ node {
             slackSend color: "warning", message: "Started `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n_The changes:_\n${lastChanges}"
 
         stage 'Test'
-          cd /root/server/reports
-          touch *.xml
-          export DJANGO_SETTINGS_MODULE=qetela.settings.dev
-          virtualenv -p python3 qetelaenv
-          source qetelaenv
-          pip3 install -r requirements.txt
-          python3 manage.py jenkins --enable-coverage
+          sh 'cd /root/server/reports'
+          sh 'touch *.xml'
+          sh 'export DJANGO_SETTINGS_MODULE=qetela.settings.dev'
+          sh 'virtualenv -p python3 qetelaenv'
+          sh 'source qetelaenv'
+          sh 'pip3 install -r requirements.txt'
+          sh 'python3 manage.py jenkins --enable-coverage'
 
         stage 'Deploy'
             sh './deployment/deploy_prod.sh'
