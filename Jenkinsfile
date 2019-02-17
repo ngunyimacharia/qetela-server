@@ -13,9 +13,9 @@ node {
         stage 'Test'
           sh 'export DJANGO_SETTINGS_MODULE=qetela.settings.dev'
           sh 'virtualenv -p python3 qetelaenv'
-          sh 'source qetelaenv'
-          sh 'pip3 install -r requirements.txt'
-          sh 'python3 manage.py jenkins --enable-coverage'
+          sh '. qetelaenv/bin/activate'
+          sh 'qetelaenv/bin/pip install -r requirements.txt'
+          sh 'qetelaenv/bin/python3 manage.py test
 
         stage 'Deploy'
             sh './deployment/deploy_prod.sh'
