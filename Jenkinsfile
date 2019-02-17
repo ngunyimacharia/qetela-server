@@ -11,11 +11,7 @@ node {
             slackSend color: "warning", message: "Started `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n_The changes:_\n${lastChanges}"
 
         stage 'Test'
-          sh 'export DJANGO_SETTINGS_MODULE=qetela.settings.dev'
-          sh 'virtualenv -p python3 qetelaenv'
-          sh '. qetelaenv/bin/activate'
-          sh 'qetelaenv/bin/pip install -r requirements.txt'
-          sh 'qetelaenv/bin/python3 manage.py test'
+            sh './deployment/test_prod.sh'
 
         stage 'Deploy'
             sh './deployment/deploy_prod.sh'
