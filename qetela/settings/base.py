@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
     #included apps
     'graphene_django',
-    'django_nose',
+    'django_jenkins',
 
     #custom applications
     'seeder',
@@ -128,12 +128,4 @@ GRAPHENE = {
     'SCHEMA': 'qetela.schema.schema'
 }
 
-
-# Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-# Tell nose to measure coverage on the 'foo' and 'bar' apps
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=seeder,organisations,account',
-]
+PROJECT_APPS = ('organisations','account')

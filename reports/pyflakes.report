@@ -1,0 +1,44 @@
+../../../djangobin/env/lib/python3.7/site-packages/django/contrib/messages/__init__.py:1: [E] PYFLAKES:'from django.contrib.messages.api import *' used; unable to detect undefined names
+../../../djangobin/env/lib/python3.7/site-packages/django/contrib/messages/__init__.py:1: [E] PYFLAKES:'django.contrib.messages.api.*' imported but unused
+../../../djangobin/env/lib/python3.7/site-packages/django/contrib/messages/__init__.py:2: [E] PYFLAKES:'from django.contrib.messages.constants import *' used; unable to detect undefined names
+../../../djangobin/env/lib/python3.7/site-packages/django/contrib/messages/__init__.py:2: [E] PYFLAKES:'django.contrib.messages.constants.*' imported but unused
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/types.py:36: [E] PYFLAKES:undefined name 'Model'
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/types.py:38: [E] PYFLAKES:undefined name 'Type'
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/utils.py:15: [E] PYFLAKES:'django_filters' imported but unused
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:425: [E] PYFLAKES:local variable 'fd' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:544: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:583: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:624: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:690: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:731: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:908: [E] PYFLAKES:local variable 'reporter_1' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:912: [E] PYFLAKES:local variable 'reporter_2' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:971: [E] PYFLAKES:local variable 'reporter_1' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:975: [E] PYFLAKES:local variable 'reporter_2' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_query.py:999: [E] PYFLAKES:local variable 'expected' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_converter.py:86: [E] PYFLAKES:redefinition of unused 'test_should_url_convert_string' from line 70
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/tests/test_converter.py:94: [E] PYFLAKES:redefinition of unused 'test_should_auto_convert_id' from line 90
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:224: [E] PYFLAKES:local variable 'schema' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:385: [E] PYFLAKES:redefinition of unused 'test_filter_filterset_related_results' from line 230
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:395: [E] PYFLAKES:local variable 'r1' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:398: [E] PYFLAKES:local variable 'r2' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:403: [E] PYFLAKES:local variable 'r3' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:571: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/filter/tests/test_fields.py:617: [E] PYFLAKES:local variable 'r' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/rest_framework/tests/test_mutation.py:148: [E] PYFLAKES:local variable 'result' is assigned to but never used
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/rest_framework/tests/test_field_converter.py:5: [E] PYFLAKES:'graphene.InputObjectType' imported but unused
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/forms/__init__.py:1: [E] PYFLAKES:'.forms.GlobalIDFormField' imported but unused
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/forms/__init__.py:1: [E] PYFLAKES:'.forms.GlobalIDMultipleChoiceField' imported but unused
+../../../djangobin/env/lib/python3.7/site-packages/graphene_django/forms/tests/test_converter.py:4: [E] PYFLAKES:'graphene' imported but unused
+seeder/tests.py:1: [E] PYFLAKES:'django.test.TestCase' imported but unused
+seeder/views.py:1: [E] PYFLAKES:'django.shortcuts.render' imported but unused
+seeder/models.py:1: [E] PYFLAKES:'django.db.models' imported but unused
+seeder/admin.py:1: [E] PYFLAKES:'django.contrib.admin' imported but unused
+account/tests.py:1: [E] PYFLAKES:'django.test.TestCase' imported but unused
+account/views.py:1: [E] PYFLAKES:'django.shortcuts.render' imported but unused
+account/models.py:1: [E] PYFLAKES:'django.db.models' imported but unused
+account/admin.py:1: [E] PYFLAKES:'django.contrib.admin' imported but unused
+organisations/seeder.py:1: [E] PYFLAKES:'factory.django' imported but unused
+organisations/views.py:1: [E] PYFLAKES:'django.shortcuts.render' imported but unused
+organisations/models.py:1: [E] PYFLAKES:'datetime' imported but unused
+organisations/models.py:4: [E] PYFLAKES:'django.utils.timezone' imported but unused
