@@ -10,18 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os, json
+import os
 from django.core.exceptions import ImproperlyConfigured
-
-with open(os.path.abspath("qetela/secrets.json")) as f:
-    secrets = json.loads(f.read())
-
-
-def get_secret_setting(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        raise ImproperlyConfigured("Set the {} setting".format(setting))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))

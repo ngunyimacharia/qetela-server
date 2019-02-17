@@ -1,6 +1,18 @@
 import os
 from .base import *
 
+
+with open(os.path.abspath("qetela/secrets.json")) as f:
+    secrets = json.loads(f.read())
+
+
+def get_secret_setting(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        raise ImproperlyConfigured("Set the {} setting".format(setting))
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_secret_setting('SECRET_KEY')
 
