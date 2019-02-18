@@ -1,5 +1,6 @@
 from organisations.models import Organisation as OrganisationModel
 from organisations.models import Level as LevelModel
+from organisations.models import Team as TeamModel
 import graphene
 
 class CreateOrganisationMutation(graphene.Mutation):
@@ -134,6 +135,63 @@ class DeleteLevelMutation(graphene.Mutation):
         result = level.delete()
         return DeleteLevelMutation(ok=result)
 
+class AddTeamMutation(graphene.Mutation):
+    level_id = graphene.Int()
+    id = graphene.Int()
+    name = graphene.String()
+    active = graphene.Boolean()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
+
+    class Arguments:
+        level_id = graphene.Int()
+        id = graphene.Int()
+        name = graphene.String()
+        active = graphene.Boolean()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
+
+    def mutate(self, info, level_id, name):
+        level = LevelModel.objects.get(pk=level_id)
+        team = TeamModel(name=name,level=level,active=True)
+        team.save()
+        return AddTeamMutation(id=team.id,name=team.name,active=team.active)
+
+
+class UpdateTeamMutation(graphene.Mutation):
+    id = graphene.Int()
+    name = graphene.String()
+    active = graphene.Boolean()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
+
+    class Arguments:
+        id = graphene.Int()
+        name = graphene.String()
+        active = graphene.Boolean()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
+
+    def mutate(self, info, id, name):
+        team = TeamModel.objects.get(pk=id)
+        team.name = name
+        team.save()
+        return UpdateTeamMutation(id=team.id,name=team.name,active=team.active)
+
+class DeleteTeamMutation(graphene.Mutation):
+    id = graphene.Int()
+    ok = graphene.Boolean()
+
+    class Arguments:
+        id = graphene.Int()
+        ok = graphene.Boolean()
+
+    def mutate(self, info, id):
+        team = TeamModel.objects.get(pk=id)
+        if team.children.count():
+            raise ValueError("You cannot delete a team with children.")
+        result = team.delete()
+        return DeleteLevelMutation(ok=result)
 
 class OrganisationMutations(graphene.ObjectType):
     create_organisation = CreateOrganisationMutation.Field()
@@ -142,3 +200,6 @@ class OrganisationMutations(graphene.ObjectType):
     add_level = AddLevelMutation.Field()
     update_level = UpdateLevelMutation.Field()
     delete_level = DeleteLevelMutation.Field()
+    add_team = AddTeamMutation.Field()
+    update_team = UpdateTeamMutation.Field()
+    delete_team = DeleteTeamMutation.Field()

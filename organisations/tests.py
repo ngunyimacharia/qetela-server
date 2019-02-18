@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import Organisation,Level
+from .models import Organisation,Level,Team
 from .seeder import gen_organisastion
 from qetela.schema import schema
 
@@ -17,6 +17,13 @@ def initialize():
         organisation=organisation
     )
     level.save()
+    team = Team(
+        id=1,
+        name='Test',
+        active=True,
+        level=level
+    )
+    team.save()
 
 class OrganisationGraphTests(TestCase):
     def test_organisations_with_no_records(self):
@@ -93,7 +100,6 @@ class OrganisationGraphTests(TestCase):
         assert not result.errors
         assert result.data == expected
 
-
     def test_adding_organisation(self):
         mutation = '''
         mutation createOrganisation {
@@ -116,7 +122,6 @@ class OrganisationGraphTests(TestCase):
         result = schema.execute(mutation)
         assert not result.errors
         assert result.data == expected
-
 
     def test_updating_organisation(self):
         initialize()
@@ -247,6 +252,98 @@ class LevelGraphTests(TestCase):
         assert not result.errors
         assert result.data == expected
 
+class TeamGraphTest(TestCase):
+    def test_get_organisation_with_team(self):
+        initialize()
+        query = '''
+        query organisation{
+          organisation(id:1){
+            name
+            levelSet{
+              label
+              teamSet{
+                id,
+                name
+              }
+            }
+          }
+        }
+        '''
+        expected = {
+           "organisation": {
+              "name": "Test",
+              "levelSet": [
+                {
+                  "label": "Test",
+                  "teamSet": [
+                    {
+                      "id": "1",
+                      "name": "Test"
+                    }
+                  ]
+                }
+                ]
+            }
+         }
+        result = schema.execute(query)
+        assert not result.errors
+        assert result.data == expected
+
+    def test_adding_team(self):
+        initialize()
+        mutation = '''
+        mutation addTeam{
+          addTeam(levelId:1,name:"Test"){
+            name
+          }
+        }
+        '''
+        expected = {
+           "addTeam": {
+             "name": "Test"
+           }
+        }
+        result = schema.execute(mutation)
+        assert not result.errors
+        assert result.data == expected
+
+    def test_updating_team(self):
+        initialize()
+        mutation = '''
+        mutation updateTeam{
+          updateTeam(id:1,name:"Updated"){
+            id
+            name
+          }
+        }
+        '''
+        expected = {
+           "updateTeam": {
+             "id":1,
+             "name": "Updated"
+           }
+        }
+        result = schema.execute(mutation)
+        assert not result.errors
+        assert result.data == expected
+
+    def test_deleting_team(self):
+        initialize()
+        mutation = '''
+        mutation deleteTeam{
+          deleteTeam(id:1){
+            ok
+          }
+        }
+        '''
+        expected = {
+           "deleteTeam": {
+             "ok": True
+           }
+        }
+        result = schema.execute(mutation)
+        assert not result.errors
+        assert result.data == expected
 
 class OrganisationSeederTest(TestCase):
     def test_seeder(self):
