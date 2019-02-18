@@ -14,3 +14,29 @@ class Organisation(models.Model):
 
     def __str__(self):
         return self.name
+
+#model for teams
+class Level(models.Model):
+    number = models.IntegerField()
+    label = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True) #date record was created
+    updated = models.DateTimeField(auto_now=True) #date record was updated
+    organisation = models.ForeignKey(
+        'Organisation',
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.label
+
+#add branches to organisations
+
+def create_branches(instance, created, raw, **kwargs):
+    # Ignore fixtures and saves for existing courses.
+    if not created or raw:
+        return
+
+    if instance.branches:
+        Level.objects.get_or_create(number=1,label="Branch",organisation=instance)
+
+models.signals.post_save.connect(create_branches, sender=Organisation, dispatch_uid='create_branches')

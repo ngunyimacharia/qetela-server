@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 0.0.1 - 2019-02-18
+
 ### Added
  - Organisation app created and added to admin
  - GraphQL integrated
@@ -26,4 +28,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README.md initialized
 - License added
 
-[Unreleased]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.0...HEAD
+[Unreleased]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.0...v0.0.1
