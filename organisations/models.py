@@ -15,7 +15,7 @@ class Organisation(models.Model):
     def __str__(self):
         return self.name
 
-#model for teams
+#model for levels
 class Level(models.Model):
     number = models.IntegerField()
     label = models.CharField(max_length=200)
@@ -29,8 +29,20 @@ class Level(models.Model):
     def __str__(self):
         return self.label
 
-#add branches to organisations
+#model for teams
+class Team(models.Model):
+    name = models.CharField(max_length=200)
+    active = models.BooleanField(default=1)
+    parent = models.ForeignKey('self', blank=True, null=True , on_delete=models.CASCADE, related_name='children')
+    level = models.ForeignKey(
+            'Level',
+            on_delete=models.CASCADE,
+    )
 
+    def __str__(self):
+        return self.name
+
+#add branches to organisations
 def create_branches(instance, created, raw, **kwargs):
     # Ignore fixtures and saves for existing courses.
     if not created or raw:
