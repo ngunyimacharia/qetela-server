@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd /root/qetela-server
 git pull

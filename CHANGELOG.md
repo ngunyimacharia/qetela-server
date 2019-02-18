@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Seeder command created and implemented for organisation model
  - Added requirements.txt
  - Coverage integrated to show test coverage
- - Travis CI added
+ - Jenkins integrated
 
 ## 0.0.0 - 2019-02-12
 
