@@ -1,4 +1,5 @@
 from organisations.models import Organisation as OrganisationModel
+from organisations.models import Level as LevelModel
 import graphene
 
 class CreateOrganisationMutation(graphene.Mutation):
@@ -71,8 +72,73 @@ class DeleteOrganisationMutation(graphene.Mutation):
         result = organisation.delete()
         return DeleteOrganisationMutation(ok=result)
 
+class AddLevelMutation(graphene.Mutation):
+    organisation_id = graphene.Int()
+    id = graphene.Int()
+    label = graphene.String()
+    number = graphene.Int()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
+
+    class Arguments:
+        organisation_id = graphene.Int()
+        id = graphene.Int()
+        label = graphene.String()
+        number = graphene.Int()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
+
+    def mutate(self, info, organisation_id, label):
+        organisation = OrganisationModel.objects.get(pk=organisation_id)
+        levels = organisation.level_set.all()
+        level = LevelModel(label=label,number=(len(levels)+1),organisation=organisation)
+        level.save()
+        return AddLevelMutation(id=level.id,label=level.label,number=level.number,created=level.created,updated=level.updated)
+
+
+class UpdateLevelMutation(graphene.Mutation):
+    id = graphene.Int()
+    label = graphene.String()
+    number = graphene.Int()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
+
+    class Arguments:
+        id = graphene.Int()
+        label = graphene.String()
+        number = graphene.Int()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
+
+    def mutate(self, info, id, label):
+
+        level = LevelModel.objects.get(pk=id)
+        level.label = label
+        level.save()
+
+        return UpdateLevelMutation(id=level.id,label=level.label,number=level.number,created=level.created,updated=level.updated)
+
+
+class DeleteLevelMutation(graphene.Mutation):
+    id = graphene.Int()
+    ok = graphene.Boolean()
+
+    class Arguments:
+        id = graphene.Int(required=True)
+
+    def mutate(self, info, id):
+        level = LevelModel.objects.get(pk=id)
+        organisation = level.organisation
+        if(len(organisation.level_set.filter(number__gt=level.number))):
+            raise ValueError("You can only delete the lowest level.")
+        result = level.delete()
+        return DeleteLevelMutation(ok=result)
+
 
 class OrganisationMutations(graphene.ObjectType):
     create_organisation = CreateOrganisationMutation.Field()
     update_organisation = UpdateOrganisationMutation.Field()
     delete_organisation = DeleteOrganisationMutation.Field()
+    add_level = AddLevelMutation.Field()
+    update_level = UpdateLevelMutation.Field()
+    delete_level = DeleteLevelMutation.Field()

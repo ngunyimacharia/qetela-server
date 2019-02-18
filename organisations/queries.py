@@ -1,4 +1,5 @@
 from organisations.models import Organisation as OrganisationModel
+from organisations.models import Level as LevelModel
 from graphene_django.types import DjangoObjectType
 import graphene
 
@@ -6,6 +7,9 @@ class Organisation(DjangoObjectType):
     class Meta:
         model = OrganisationModel
 
+class Level(DjangoObjectType):
+    class Meta:
+        model = LevelModel
 
 class OrganisationQueries(graphene.ObjectType):
     organisation = graphene.Field(Organisation,id=graphene.ID(required=True))
@@ -19,3 +23,6 @@ class OrganisationQueries(graphene.ObjectType):
 
     def resolve_organisations(self, info, **kwargs):
         return OrganisationModel.objects.all()
+
+    def resolve_levels(self, info, **kwargs):
+        return LevelModel.objects.all()
