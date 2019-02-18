@@ -27,20 +27,36 @@ class Level(models.Model):
     )
 
     def __str__(self):
-        return self.label
+        return self.organisation.name + ":" + self.label
 
 #model for teams
 class Team(models.Model):
     name = models.CharField(max_length=200)
     active = models.BooleanField(default=1)
     parent = models.ForeignKey('self', blank=True, null=True , on_delete=models.CASCADE, related_name='children')
+    created = models.DateTimeField(auto_now_add=True) #date record was created
+    updated = models.DateTimeField(auto_now=True) #date record was updated
     level = models.ForeignKey(
             'Level',
             on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return self.name
+        return self.level.organisation.name + ":" + self.name
+
+#model for positions
+class Position(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True) #date record was created
+    updated = models.DateTimeField(auto_now=True) #date record was updated
+    team = models.ForeignKey(
+            'Team',
+            on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.title
 
 #add branches to organisations
 def create_branches(instance, created, raw, **kwargs):

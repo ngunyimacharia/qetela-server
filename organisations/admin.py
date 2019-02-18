@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 #import models
-from .models import Organisation,Level,Team
+from .models import Organisation,Level,Team, Position
 
 
 class LevelInLine(admin.TabularInline):
@@ -28,6 +28,23 @@ class LevelAdmin(admin.ModelAdmin):
     inlines = [TeamInLine]
     ordering = ['number']
 
+class PositionInLine(admin.TabularInline):
+    model = Position
+    extra = 3
+
+class TeamAdmin(admin.ModelAdmin):
+    fields = ('name','active','parent')
+    list_display = ('name','active','parent')
+    list_filter = ['level','created','updated']
+    inlines = [PositionInLine]
+
+class PositionAdmin(admin.ModelAdmin):
+    fields = ('title','description','team')
+    list_display = ('title','team')
+    list_filter = ['team','created','updated']
+
 #add models to admin section
 admin.site.register(Organisation,OrganisationAdmin)
 admin.site.register(Level,LevelAdmin)
+admin.site.register(Team,TeamAdmin)
+admin.site.register(Position,PositionAdmin)
