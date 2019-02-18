@@ -1,6 +1,7 @@
 from organisations.models import Organisation as OrganisationModel
 from organisations.models import Level as LevelModel
 from organisations.models import Team as TeamModel
+from organisations.models import Position as PositionModel
 import graphene
 
 class CreateOrganisationMutation(graphene.Mutation):
@@ -193,6 +194,65 @@ class DeleteTeamMutation(graphene.Mutation):
         result = team.delete()
         return DeleteLevelMutation(ok=result)
 
+class AddPositionMutation(graphene.Mutation):
+    team_id = graphene.Int()
+    id = graphene.Int()
+    title = graphene.String()
+    description = graphene.String()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
+
+    class Arguments:
+        team_id = graphene.Int()
+        id = graphene.Int()
+        title = graphene.String()
+        description = graphene.String()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
+
+    def mutate(self, info, team_id, title, description):
+        team = TeamModel.objects.get(pk=team_id)
+        position = PositionModel(title=title,description=description,team=team)
+        position.save()
+        return position
+
+class UpdatePositionMutation(graphene.Mutation):
+    team_id = graphene.Int()
+    id = graphene.Int()
+    title = graphene.String()
+    description = graphene.String()
+    created = graphene.types.datetime.DateTime()
+    updated = graphene.types.datetime.DateTime()
+
+    class Arguments:
+        team_id = graphene.Int()
+        id = graphene.Int()
+        title = graphene.String()
+        description = graphene.String()
+        created = graphene.types.datetime.DateTime()
+        updated = graphene.types.datetime.DateTime()
+
+    def mutate(self, info, id, **kwargs):
+        position = PositionModel.objects.get(pk=id)
+        for k,v in kwargs.items():
+            setattr(position,k,v)
+        position.save()
+        return position
+
+class DeletePositionMutation(graphene.Mutation):
+    id = graphene.Int()
+    ok = graphene.Boolean()
+
+    class Arguments:
+        id = graphene.Int()
+        ok = graphene.Boolean()
+
+    def mutate(self, info, id):
+        position = PositionModel.objects.get(pk=id)
+        result = position.delete()
+        return DeletePositionMutation(ok=result)
+
+
 class OrganisationMutations(graphene.ObjectType):
     create_organisation = CreateOrganisationMutation.Field()
     update_organisation = UpdateOrganisationMutation.Field()
@@ -203,3 +263,6 @@ class OrganisationMutations(graphene.ObjectType):
     add_team = AddTeamMutation.Field()
     update_team = UpdateTeamMutation.Field()
     delete_team = DeleteTeamMutation.Field()
+    add_position = AddPositionMutation.Field()
+    update_position = UpdatePositionMutation.Field()
+    delete_position = DeletePositionMutation.Field()
