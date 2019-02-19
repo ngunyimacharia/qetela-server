@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
+from organisations.models import Position
 from django.test import TestCase
+from .seeder import gen_users
 
 from qetela.schema import schema
 
@@ -144,3 +146,9 @@ class AccountGraphTests(TestCase):
         result = schema.execute(mutation)
         assert not result.errors
         assert result.data == expected
+
+
+class AccountSeederTest(TestCase):
+    def test_seeder(self):
+        gen_users()
+        assert Position.objects.all().count() == User.objects.all().count()

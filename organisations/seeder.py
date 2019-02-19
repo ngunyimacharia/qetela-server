@@ -5,7 +5,7 @@ from django.conf import settings
 
 from .models import Organisation,Level,Team,Position
 from random import randint
-import random, requests, os
+import random, os
 
 fake = Faker()
 fake.add_provider(internet)
