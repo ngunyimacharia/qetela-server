@@ -1,4 +1,8 @@
 from django.contrib.auth.models import User as UserModel
+from .models import UserPosition as UserPositionModel
+from organisations.models import Position as PositionModel
+from organisations.models import Organisation as OrganisationModel
+
 import graphene
 
 
@@ -13,6 +17,7 @@ class CreateUserMutation(graphene.Mutation):
     is_active = graphene.Boolean()
     date_joined = graphene.types.datetime.DateTime()
     last_login = graphene.types.datetime.DateTime()
+    org_id = graphene.Int()
 
     class Arguments:
         username = graphene.String(required=True)
@@ -22,6 +27,7 @@ class CreateUserMutation(graphene.Mutation):
         password = graphene.String(required=True)
         c_password = graphene.String(required=True)
         is_active = graphene.Boolean()
+        org_id = graphene.Int()
 
     def mutate(self, info, username, email, password, c_password, **kwargs):
         #check if username is taken
@@ -36,7 +42,11 @@ class CreateUserMutation(graphene.Mutation):
             raise ValueError("Passwords do not match")
         user = UserModel.objects.create_user(username, email, password)
         for k,v in kwargs.items():
-            setattr(user,k,v)
+            if k == "org_id":
+                organisation = OrganisationModel.objects.get(pk=v)
+                organisation.users.add(user.id)
+            else:
+                setattr(user,k,v)
         user.save()
         return CreateUserMutation(
             id=user.id,
@@ -49,7 +59,6 @@ class CreateUserMutation(graphene.Mutation):
             last_login=user.last_login,
 
         )
-
 
 class UpdateUserMutation(graphene.Mutation):
     id = graphene.Int()
@@ -111,7 +120,6 @@ class UpdateUserMutation(graphene.Mutation):
 
         )
 
-
 class DeleteUserMutation(graphene.Mutation):
     username = graphene.String()
     ok = graphene.Boolean()
@@ -125,8 +133,79 @@ class DeleteUserMutation(graphene.Mutation):
         result = user.delete()
         return DeleteUserMutation(ok=result)
 
+class CreateUserPositionMutation(graphene.Mutation):
+    id = graphene.Int()
+    username = graphene.String()
+    position_id = graphene.Int()
+    position_title = graphene.String()
+    start = graphene.types.datetime.Date()
+    stop = graphene.types.datetime.Date()
+
+    class Arguments:
+        username = graphene.String(required=True)
+        position_id = graphene.Int(required=True)
+        start = graphene.types.datetime.Date()
+        stop = graphene.types.datetime.Date()
+
+    def mutate(self, info, username, position_id, start, **kwargs):
+        user = UserModel.objects.get(username=username)
+        position = PositionModel.objects.get(pk=position_id)
+        #confirm the position and user are in the same organisation
+        if not position.team.level.organisation.users.filter(username=username).count():
+            raise ValueError("User is not in the organisation")
+        #confirm user position doesn't already exist
+        if UserPositionModel.objects.filter(user=user,position=position,start=start,stop=None).count():
+            raise ValueError("User is already in the position organisation")
+        up = UserPositionModel(
+            user = user,
+            position = position,
+            start = start
+        )
+
+        for k,v in kwargs.items():
+            setattr(up,k,v)
+        up.save()
+        return CreateUserPositionMutation(id=up.id,username=username,position_title=position.title,start=up.start,stop=up.stop)
+
+class UpdateUserPositionMutation(graphene.Mutation):
+    id = graphene.Int()
+    username = graphene.String()
+    position_id = graphene.Int()
+    position_title = graphene.String()
+    start = graphene.types.datetime.Date()
+    stop = graphene.types.datetime.Date()
+
+    class Arguments:
+        id = graphene.Int()
+        start = graphene.types.datetime.Date()
+        stop = graphene.types.datetime.Date()
+
+    def mutate(self, info, id, **kwargs):
+        up = UserPositionModel.objects.get(pk=id)
+
+        for k,v in kwargs.items():
+            setattr(up,k,v)
+        up.save()
+        return UpdateUserPositionMutation(id=up.id,username=up.user.username,position_title=up.position.title,start=up.start,stop=up.stop)
+
+class DeleteUserPositionMutation(graphene.Mutation):
+    id = graphene.Int()
+    ok = graphene.Boolean()
+
+    class Arguments:
+        id = graphene.Int(required=True)
+
+    def mutate(self, info, id):
+
+        up = UserPositionModel.objects.get(id=id)
+        result = up.delete()
+        return DeleteUserPositionMutation(ok=result)
+
 
 class AccountMutations(graphene.ObjectType):
     create_user = CreateUserMutation.Field()
     update_user = UpdateUserMutation.Field()
     delete_user = DeleteUserMutation.Field()
+    create_user_position = CreateUserPositionMutation.Field()
+    update_user_position = UpdateUserPositionMutation.Field()
+    delete_user_position = DeleteUserPositionMutation.Field()

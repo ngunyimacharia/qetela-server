@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 #model for organisations
 class Organisation(models.Model):
@@ -11,6 +12,7 @@ class Organisation(models.Model):
     cf_frequency = models.IntegerField(default=7) #frequency of getting feedback from employees on KPIs
     created = models.DateTimeField(auto_now_add=True) #date record was created
     updated = models.DateTimeField(auto_now=True) #date record was updated
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return self.name

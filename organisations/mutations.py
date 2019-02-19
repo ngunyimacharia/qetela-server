@@ -30,7 +30,6 @@ class CreateOrganisationMutation(graphene.Mutation):
         organisation.save()
         return CreateOrganisationMutation(id=organisation.id,name=organisation.name,website=organisation.website,branches=organisation.branches,cf_frequency=organisation.cf_frequency,created=organisation.created,updated=organisation.updated)
 
-
 class UpdateOrganisationMutation(graphene.Mutation):
     id = graphene.Int()
     name = graphene.String()
@@ -59,7 +58,6 @@ class UpdateOrganisationMutation(graphene.Mutation):
         organisation.save()
 
         return UpdateOrganisationMutation(id=id,name=organisation.name,website=organisation.website,branches=organisation.branches,cf_frequency=organisation.cf_frequency,created=organisation.created,updated=organisation.updated)
-
 
 class DeleteOrganisationMutation(graphene.Mutation):
     id = graphene.Int()
@@ -97,7 +95,6 @@ class AddLevelMutation(graphene.Mutation):
         level.save()
         return AddLevelMutation(id=level.id,label=level.label,number=level.number,created=level.created,updated=level.updated)
 
-
 class UpdateLevelMutation(graphene.Mutation):
     id = graphene.Int()
     label = graphene.String()
@@ -119,7 +116,6 @@ class UpdateLevelMutation(graphene.Mutation):
         level.save()
 
         return UpdateLevelMutation(id=level.id,label=level.label,number=level.number,created=level.created,updated=level.updated)
-
 
 class DeleteLevelMutation(graphene.Mutation):
     id = graphene.Int()
@@ -157,7 +153,6 @@ class AddTeamMutation(graphene.Mutation):
         team = TeamModel(name=name,level=level,active=True)
         team.save()
         return AddTeamMutation(id=team.id,name=team.name,active=team.active)
-
 
 class UpdateTeamMutation(graphene.Mutation):
     id = graphene.Int()
@@ -251,7 +246,6 @@ class DeletePositionMutation(graphene.Mutation):
         position = PositionModel.objects.get(pk=id)
         result = position.delete()
         return DeletePositionMutation(ok=result)
-
 
 class OrganisationMutations(graphene.ObjectType):
     create_organisation = CreateOrganisationMutation.Field()

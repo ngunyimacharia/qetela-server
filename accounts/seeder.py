@@ -23,11 +23,13 @@ def gen_users():
         f_profile = fake.simple_profile()
         while User.objects.filter(username=f_profile['username']).count():
             f_profile = fake.simple_profile()
-            
+
         user = User.objects.create_user(f_profile['username'], f_profile['mail'], 'password')
         user.first_name = f_profile['name'].split(' ')[0]
         user.last_name = f_profile['name'].split(' ')[1]
         user.save()
+        #add user to organisation
+        position.team.level.organisation.users.add(user)
         #add user to position
         up = UserPosition(
                 user = user,
