@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 
     #custom applications
     'seeder',
-    'account.apps.AccountConfig',
+    'accounts',
     'organisations',
 ]
 
