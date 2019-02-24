@@ -1,4 +1,5 @@
 import graphene
+import graphql_jwt
 from organisations.queries import OrganisationQueries
 from organisations.mutations import OrganisationMutations
 from accounts.queries import AccountQueries
@@ -9,6 +10,8 @@ class Query(OrganisationQueries, AccountQueries, graphene.ObjectType):
 
 
 class Mutation(OrganisationMutations, AccountMutations, graphene.ObjectType):
-    pass
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

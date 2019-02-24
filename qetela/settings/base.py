@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'qetela.urls'
@@ -115,7 +116,15 @@ STATIC_URL = '/static/'
 #Below here are our own customisations to this file
 #Let's set where the schema lives
 GRAPHENE = {
-    'SCHEMA': 'qetela.schema.schema'
+    'SCHEMA': 'qetela.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
 
 PROJECT_APPS = ('organisations','account')
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
