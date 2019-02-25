@@ -88,7 +88,7 @@ class UserGraphTests(TestCase):
         initialize()
         query = '''
         query user{
-            user(username:"username"){
+            user(email:"email@example.com"){
                 username,
                 email
             }

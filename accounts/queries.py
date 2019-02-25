@@ -13,10 +13,10 @@ class UserPosition(DjangoObjectType):
 
 class AccountQueries(graphene.ObjectType):
     users = graphene.List(User)
-    user = graphene.Field(User,username=graphene.String(required=True))
+    user = graphene.Field(User,email=graphene.String(required=True))
 
-    def resolve_user(self, info, username):
-        return UserModel.objects.get(username=username)
+    def resolve_user(self, info, email):
+        return UserModel.objects.get(email=email)
 
     def resolve_users(self, info,):
         return UserModel.objects.all()
