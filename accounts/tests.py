@@ -286,4 +286,4 @@ class UserPositionTests(TestCase):
 class AccountSeederTest(TestCase):
     def test_seeder(self):
         gen_users()
-        assert Position.objects.all().count() == User.objects.all().count()
+        assert Position.objects.all().count() < User.objects.all().count()
