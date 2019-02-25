@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     #included apps
     'graphene_django',
     'django_jenkins',
+    'corsheaders',
 
     #custom applications
     'seeder',
@@ -50,6 +51,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    #cors middleware
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'qetela.urls'
@@ -128,3 +133,15 @@ AUTHENTICATION_BACKENDS = [
     'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+    'app.qetela.tk',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost:3000',
+    r'^(https?://)?(\w+\.)?qetela\.tk$',
+)

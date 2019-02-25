@@ -37,3 +37,8 @@ def gen_users():
                 start= datetime.date(randint(2000, 2019), randint(1, 11), randint(1, 28))
             )
         up.save()
+    # add superuser
+    su = User.objects.create_user('ngunyimacharia','ngunyimacharia@gmail.com', 'password')
+    su.first_name = 'Kelvin'
+    su.last_name = 'Ngunyi'
+    su.save()
