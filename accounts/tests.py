@@ -104,6 +104,26 @@ class UserGraphTests(TestCase):
         assert not result.errors
         assert result.data == expected
 
+    def test_get_random_user(self):
+        initialize()
+        query = '''
+        query randomUser{
+            randomUser{
+                username,
+                email
+            }
+        }
+        '''
+        expected = {
+                "randomUser": {
+                  "username": "username",
+                  "email": "email@example.com"
+                }
+        }
+        result = schema.execute(query)
+        assert not result.errors
+        assert result.data == expected
+
     def test_adding_user(self):
         mutation = '''
         mutation createUser {
