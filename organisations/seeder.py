@@ -43,7 +43,7 @@ def gen_teams(organisation):
             p_teams = p_level.team_set.all()
             for p_team in p_teams:
                 # loop no of times needed per parent team
-                for _ in range(2):
+                for _ in range(4):
                     team = Team(name=get_rand_word(level.label),level=level,active=True,parent=p_team)
         team.save()
         gen_positions(team)
