@@ -35,6 +35,7 @@ def gen_teams(organisation):
         if level.number == 1:
             #if top level add one team
             team = Team(name=get_rand_word(level.label),level=level,active=True)
+            team.save()
         else:
             #if not top level,
             #get parent level
@@ -45,7 +46,7 @@ def gen_teams(organisation):
                 # loop no of times needed per parent team
                 for _ in range(4):
                     team = Team(name=get_rand_word(level.label),level=level,active=True,parent=p_team)
-        team.save()
+                    team.save()
         gen_positions(team)
 
 # generate levels
