@@ -28,6 +28,7 @@ def gen_positions(team):
 
 # generate teams
 def gen_teams(organisation):
+    #print("Generating teams")
     #get levels in organisation
     levels = Level.objects.filter(organisation=organisation).order_by('number')
     # loop through levels
@@ -35,6 +36,7 @@ def gen_teams(organisation):
         if level.number == 1:
             #if top level add one team
             team = Team(name=get_rand_word(level.label),level=level,active=True)
+            #print("Team:"+team.name)
             team.save()
         else:
             #if not top level,
@@ -44,22 +46,26 @@ def gen_teams(organisation):
             p_teams = p_level.team_set.all()
             for p_team in p_teams:
                 # loop no of times needed per parent team
-                for _ in range(2):
+                for _ in range(1):
                     team = Team(name=get_rand_word(level.label),level=level,active=True,parent=p_team)
+                    #print("Team:"+team.name)
                     team.save()
         gen_positions(team)
 
 # generate levels
 def gen_levels(organisation):
+    #print("Generating levels")
     labels = ['Department','Faculty','Division','Team']
     for num in range(4):
         level_no = num+organisation.branches+1
         level = Level(number=level_no,label=labels[randint(0,3)],organisation=organisation)
         level.save()
+        #print("Level:"+level.label)
     gen_teams(organisation)
 
 # generate organisations
 def gen_organisastion(num):
+    #print("Generating organisations")
     Organisation.objects.all().delete()
     for _ in range(num):
         organisation = Organisation(
@@ -68,5 +74,6 @@ def gen_organisastion(num):
             branches = bool(random.getrandbits(1)),
             cf_frequency = randint(2, 14),
         )
+        #print("Organisation:"+organisation.name)
         organisation.save()
         gen_levels(organisation)
