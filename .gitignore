@@ -1,3 +1,6 @@
 changelog-sample.md
 qetela/secrets.json
 reports
+manage.py
+*.pyc
+*.pyo
