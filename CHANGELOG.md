@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Team model, seeds, queries, mutations and tests
  - Level model, seeds, queries, mutations and tests
  - Position model, seeds, queries, mutations and tests
+ - Account queries, mutations and tests complete
+ - UserPosition model, seeder and test created
+ - JWT Authentication added
 
 
 ## 0.0.1 - 2019-02-18
