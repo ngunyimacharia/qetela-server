@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import path
+from . import views
 
 #import graphene
 from graphene_django.views import GraphQLView
 
 urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=True)))
 ]
