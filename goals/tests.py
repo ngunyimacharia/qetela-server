@@ -57,7 +57,5 @@ class GoalGraphTests(TestCase):
         assert len(goals) > 0
         #check kpis
         assert len(goals[3]['kpiSet']) > 0
-        #check kpi updates
-        assert len(goals[3]['kpiSet'][0]['kpiupdateSet']) > 0
         #check goal allocations
         assert len(goals[3]['goalallocationSet']) > 0
