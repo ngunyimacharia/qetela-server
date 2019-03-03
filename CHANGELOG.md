@@ -7,15 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
 ### Added
- - Team model, seeds, queries, mutations and tests
- - Level model, seeds, queries, mutations and tests
- - Position model, seeds, queries, mutations and tests
- - Account queries, mutations and tests complete
- - UserPosition model, seeder and test created
- - JWT Authentication added
+- Goals model, seeds, queries and tests
+- Goal allocations model, seeds, queries and tests
+- Kpis model, seeds, queries and tests
+- Kpi updates model, seeds, queries and tests
+- Chats model, seeds, queries and tests
+- Messages model, seeds, queries and tests
 
+### Changed
+- Organisation seeder to only seed one organisation
+- Seed command now takes argument for app to be seeded
+
+### Fixed
+- Changed name of organisation seeder from organisastions to organisations
 
 ## 0.0.2 - 2019-03-02
 
@@ -50,6 +55,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README.md initialized
 - License added
 
-[Unreleased]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.2...HEAD
 [0.0.2]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/ngunyimacharia/qetela-server/compare/v0.0.0...v0.0.1
