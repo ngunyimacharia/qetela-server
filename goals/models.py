@@ -38,6 +38,7 @@ class GoalAllocation(models.Model):
     team = models.ForeignKey(
         'organisations.Team',
         on_delete=models.CASCADE,
+        null=True
     )
     user = models.ForeignKey(
         'auth.User',

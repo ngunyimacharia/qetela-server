@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from organisations.seeder import gen_organisastion
+from organisations.seeder import gen_organisations
 from accounts.seeder import gen_users
 from goals.seeder import gen_goals
 from chats.seeder import gen_chats
@@ -19,7 +19,7 @@ class Command(BaseCommand):
             print("======================================================")
             if(app == 'organisations'):
                 #seed organisations
-                gen_organisastion(10)
+                gen_organisations()
                 return
             elif(app == 'accounts'):
                 #seed users
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         print("======================================================")
         print("Seeding the organisations app")
         print("======================================================")
-        gen_organisastion(1)
+        gen_organisations()
 
         #seed users
         print("======================================================")

@@ -4,8 +4,9 @@ from organisations.queries import OrganisationQueries
 from organisations.mutations import OrganisationMutations
 from accounts.queries import AccountQueries
 from accounts.mutations import AccountMutations
+from goals.queries import GoalQueries
 
-class Query(OrganisationQueries, AccountQueries, graphene.ObjectType):
+class Query(OrganisationQueries, AccountQueries,GoalQueries, graphene.ObjectType):
     pass
 
 

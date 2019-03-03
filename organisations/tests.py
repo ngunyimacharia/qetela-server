@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from .models import Organisation,Level,Team,Position
-from .seeder import gen_organisastion
+from .seeder import gen_organisation
 from qetela.schema import schema
 
 def initialize():
@@ -455,5 +455,5 @@ class PositionGraphTest(TestCase):
 
 class OrganisationSeederTest(TestCase):
     def test_seeder(self):
-        gen_organisastion(10)
+        gen_organisation(10)
         assert Organisation.objects.all().count() == 10

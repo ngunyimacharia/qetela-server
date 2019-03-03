@@ -65,7 +65,7 @@ def gen_levels(organisation):
     gen_teams(organisation)
 
 # generate organisations
-def gen_organisastion(num):
+def gen_organisations(num=1):
     #print("Generating organisations")
     Organisation.objects.all().delete()
     for _ in range(num):

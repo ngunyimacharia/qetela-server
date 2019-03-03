@@ -21,9 +21,9 @@ class KpiUpdate(DjangoObjectType):
     class Meta:
         model = KpiUpdateModel
 
-class OrganisationQueries(graphene.ObjectType):
+class GoalQueries(graphene.ObjectType):
     goal = graphene.Field(Goal,id=graphene.ID(required=True))
-    goals = graphene.List(Goals)
+    goals = graphene.List(Goal)
 
     def resolve_goal(self, info, **kwargs):
         id = kwargs.get('id')
