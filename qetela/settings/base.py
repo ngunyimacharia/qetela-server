@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'seeder',
     'accounts',
     'organisations',
+    'goals',
+    'chats',
 ]
 
 MIDDLEWARE = [
