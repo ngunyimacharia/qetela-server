@@ -42,6 +42,7 @@ def gen_messages(chat):
 
         #save msssage
         message = Message(
+            chat=chat,
             content = fake.paragraph(),
             user=user,
             parent=reply
@@ -51,7 +52,7 @@ def gen_messages(chat):
         messages.append(message)
 
 def gen_chats():
-    Chat.objects.all()
+    Chat.objects.all().delete()
     goals = Goal.objects.all()
     for goal in goals:
         #set team for chat
