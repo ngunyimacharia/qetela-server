@@ -2,13 +2,16 @@ from django.db import models
 
 #model for chats
 class Chat(models.Model):
+    title = models.CharField(max_length=200)
     team = models.ForeignKey(
-    'organisations.Team',
-    on_delete=models.CASCADE,
+        'organisations.Team',
+        on_delete=models.CASCADE,
+        null=True,
     )
     goal = models.ForeignKey(
-    'goals.Goal',
-    on_delete=models.CASCADE,
+        'goals.Goal',
+        on_delete=models.CASCADE,
+        null=True,
     )
     created = models.DateTimeField(auto_now_add=True) #date record was created
     updated = models.DateTimeField(auto_now=True) #date record was updated

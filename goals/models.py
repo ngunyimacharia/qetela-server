@@ -8,16 +8,18 @@ class Goal(models.Model):
     end = models.DateField(null=True)
     parent = models.ForeignKey('self', blank=True, null=True , on_delete=models.CASCADE, related_name='children')
     user = models.ForeignKey(
-    'auth.User',
-    on_delete=models.CASCADE,
+        'auth.User',
+        on_delete=models.CASCADE,
+        null=True
     )
     team = models.ForeignKey(
-    'organisations.Team',
-    on_delete=models.CASCADE,
+        'organisations.Team',
+        on_delete=models.CASCADE,
+        null=True
     )
     organisation = models.ForeignKey(
-    'organisations.Organisation',
-    on_delete=models.CASCADE,
+        'organisations.Organisation',
+        on_delete=models.CASCADE,
     )
     completed = models.DateTimeField(null=True)
     published = models.DateTimeField(null=True)
@@ -37,6 +39,11 @@ class GoalAllocation(models.Model):
         'organisations.Team',
         on_delete=models.CASCADE,
     )
+    user = models.ForeignKey(
+        'auth.User',
+        on_delete=models.CASCADE,
+        null=True
+    )
     accepted = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -44,7 +51,17 @@ class GoalAllocation(models.Model):
 #model for KPIs
 class Kpi(models.Model):
     metric = models.CharField(max_length=200)
-    target = models.IntegerField()
+    target = models.BigIntegerField()
+    current = models.BigIntegerField(default=0)
+    change = models.CharField(
+        max_length=1,
+        choices=(
+            (">","Percentage Increase"),
+            ("=","Equals"),
+            ("<","Percentage Decrease")
+        ),
+        default="=",
+    )
     goal = models.ForeignKey(
         'goals.Goal',
         on_delete=models.CASCADE,
