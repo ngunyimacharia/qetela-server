@@ -43,7 +43,7 @@ class OrganisationQueries(graphene.ObjectType):
     def resolve_levels(self, info, **kwargs):
         return LevelModel.objects.all()
 
-    def resolve_teams(self, info, **kwargs):
+    def resolve_team(self, info, **kwargs):
         id = kwargs.get('id')
         if id is not None:
             return TeamModel.objects.get(pk=id)
