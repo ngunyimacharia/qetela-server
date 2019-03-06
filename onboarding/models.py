@@ -10,6 +10,10 @@ class Kit(models.Model):
 class Task(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
+    kit = models.ForeignKey(
+        'onboarding.Kit',
+        on_delete=models.CASCADE,
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -30,7 +34,7 @@ class Session(models.Model):
         null=True,
         related_name='session_buddy_user',
     )
-    completed = models.BooleanField(default=0)
+    completed = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -44,6 +48,6 @@ class Progress(models.Model):
         'onboarding.Task',
         on_delete=models.CASCADE,
     )
-    completed = models.BooleanField(default=0)
+    completed = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
