@@ -17,7 +17,6 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-
 #model for onboarding sesssions
 class Session(models.Model):
     user = models.ForeignKey(

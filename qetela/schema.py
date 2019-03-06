@@ -6,8 +6,9 @@ from accounts.queries import AccountQueries
 from accounts.mutations import AccountMutations
 from goals.queries import GoalQueries
 from chats.queries import ChatQueries
+from onboarding.queries import OnboardingQueries
 
-class Query(OrganisationQueries,AccountQueries,GoalQueries,ChatQueries,graphene.ObjectType):
+class Query(OrganisationQueries,AccountQueries,GoalQueries,ChatQueries,OnboardingQueries,graphene.ObjectType):
     pass
 
 
