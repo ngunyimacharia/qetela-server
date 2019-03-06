@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'organisations',
     'goals',
     'chats',
+    'onboarding',
 ]
 
 MIDDLEWARE = [
