@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'goals',
     'chats',
     'onboarding',
+    'kudos',
 ]
 
 MIDDLEWARE = [

@@ -7,8 +7,17 @@ from accounts.mutations import AccountMutations
 from goals.queries import GoalQueries
 from chats.queries import ChatQueries
 from onboarding.queries import OnboardingQueries
+from kudos.queries import KudoQueries
 
-class Query(OrganisationQueries,AccountQueries,GoalQueries,ChatQueries,OnboardingQueries,graphene.ObjectType):
+class Query(
+        OrganisationQueries,
+        AccountQueries,
+        GoalQueries,
+        ChatQueries,
+        OnboardingQueries,
+        KudoQueries
+        graphene.ObjectType
+    ):
     pass
 
 

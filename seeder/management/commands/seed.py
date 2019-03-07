@@ -5,6 +5,7 @@ from accounts.seeder import gen_users
 from goals.seeder import gen_goals
 from chats.seeder import gen_chats
 from onboarding.seeder import gen_onboardings
+from kudos.seeder import gen_kudos
 
 class Command(BaseCommand):
     help = 'Seeds the database.'
@@ -38,6 +39,10 @@ class Command(BaseCommand):
                 #seed onboarding
                 gen_onboardings()
                 return
+            elif(app == 'kudos'):
+                #seed kudos
+                gen_kudos()
+                return
         print("Seeding the entire database")
 
         #seed organisations
@@ -69,3 +74,10 @@ class Command(BaseCommand):
         print("Seeding the onboarding app")
         print("======================================================")
         gen_onboardings()
+
+
+        #seed kudos
+        print("======================================================")
+        print("Seeding the kudos app")
+        print("======================================================")
+        gen_kudos()
