@@ -38,7 +38,8 @@ def gen_updates(kpi):
             total += increase
         update = KpiUpdate(
             kpi=kpi,
-            progress=increase
+            progress=increase,
+            created = fake.past_datetime(-1000,pytz.UTC)
         )
         update.save()
 
