@@ -15,7 +15,7 @@ class Query(
         GoalQueries,
         ChatQueries,
         OnboardingQueries,
-        KudoQueries
+        KudoQueries,
         graphene.ObjectType
     ):
     pass

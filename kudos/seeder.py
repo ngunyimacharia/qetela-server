@@ -2,7 +2,7 @@ import factory.django
 from faker import Faker
 from faker.providers import lorem,date_time,misc
 
-from .models import Kudo
+from .models import Kudo, Recommendation
 from django.contrib.auth.models import User
 from random import randint
 import sys, pytz
@@ -18,7 +18,7 @@ def gen_kudos():
     Kudo.objects.all().delete()
     users = User.objects.all()
     for reciever in users:
-        for _ in range(2):
+        for _ in range(3):
 
             #get user to give Kudos
             count = len(users)
@@ -32,3 +32,26 @@ def gen_kudos():
                 reciever = reciever,
             )
             kudo.save()
+
+    #generate recommendations
+    gen_recommendations()
+
+
+def gen_recommendations():
+    Recommendation.objects.all().delete()
+    users = User.objects.all()
+    for reciever in users:
+        for _ in range(3):
+
+            #get user to give Kudos
+            count = len(users)
+            random_index = randint(0, count - 1)
+            sender = users[random_index]
+
+            recommendation = Recommendation(
+                title = fake.sentence(nb_words=randint(1,7)),
+                description = fake.paragraph(),
+                sender = sender,
+                reciever = reciever,
+            )
+            recommendation.save()
