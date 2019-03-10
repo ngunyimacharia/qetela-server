@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 #model for goals
 class Goal(models.Model):
@@ -67,7 +68,7 @@ class Kpi(models.Model):
         'goals.Goal',
         on_delete=models.CASCADE,
     )
-    created = models.DateTimeField(auto_now_add=True) #date record was created
+    created = models.DateTimeField(default=now, editable=False) #date record was created
     updated = models.DateTimeField(auto_now=True) #date record was updated
 
     def __str__(self):
@@ -80,5 +81,5 @@ class KpiUpdate(models.Model):
         'goals.Kpi',
         on_delete=models.CASCADE,
     )
-    created = models.DateTimeField(auto_now_add=True) #date record was created
+    created = models.DateTimeField(default=now, editable=False) #date record was created
     updated = models.DateTimeField(auto_now=True) #date record was updated
