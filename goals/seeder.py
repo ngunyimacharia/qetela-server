@@ -124,7 +124,7 @@ def gen_goals():
                 goal = Goal(
                     title=fake.sentence(),
                     description = fake.text(),
-                    start = datetime.date(current_year, randint(1, 3), randint(1, 28)),
+                    start = datetime.date(current_year, randint(1, 2), randint(1, 28)),
                     end = datetime.date(current_year, randint(9, 11), randint(1, 28)),
                     organisation = organisation,
                     published = datetime.datetime(current_year, randint(9, 11), randint(1, 28),randint(1,23),randint(1,59),randint(1,59),0,tzinfo=pytz.UTC),
