@@ -25,9 +25,9 @@ def gen_messages(chat):
     else:
         #get all users
         users = User.objects.all()
-    limit = 30
+    limit = 5
     messages = []
-    while len(messages) < 30:
+    while len(messages) < 5:
         #get random user
         count = len(users)
         random_index = randint(0, count - 1)
