@@ -16,19 +16,14 @@ fake.add_provider(misc)
 
 def gen_progress(session):
     # get completion status
-    completed = None
-    if session.completed:
-        completed = session.completed
-    else:
-        if fake.boolean():
-            completed = fake.past_datetime(-1000,pytz.UTC)
     for task in session.kit.task_set.all():
-        progress = Progress(
-            session=session,
-            task = task,
-            completed = completed
-        )
-        progress.save()
+        if fake.boolean(20):
+            progress = Progress(
+                session=session,
+                task = task
+            )
+            progress.save()
+
 
 def gen_sessions(kit):
     for _ in range(randint(10,30)):
@@ -39,8 +34,6 @@ def gen_sessions(kit):
         random_index = randint(0, count - 1)
         buddy = users[random_index]
         completed = None
-        if fake.boolean():
-            completed = fake.past_datetime(-1000,pytz.UTC)
         session = Session(
             user = user,
             kit = kit,
@@ -51,9 +44,9 @@ def gen_sessions(kit):
         gen_progress(session)
 
 def gen_tasks(kit):
-    for _ in range(randint(3,10)):
+    for _ in range(randint(3,5)):
         task = Task(
-            name = fake.sentence(nb_words=3),
+            name = fake.sentence(),
             description = fake.paragraph(),
             kit = kit
         )
