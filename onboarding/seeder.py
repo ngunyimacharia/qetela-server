@@ -16,11 +16,11 @@ fake.add_provider(misc)
 kit_list = [
     {
         'name':'Pule Tech New Joiners Kit',
-        'tasks':['Complete The Strengths Finder Test ','Join Pule Tech Slack Team','Join Pule Tech Honey ','Onboarding with Marketing Team ','New Joiners Lunch ','Collect Pule Tech Laptop & swagg','Collect Parking Tag ','Read Pule Tech Employee hand book']
+        'tasks':['Complete The Strengths Finder Test ','Join Pule Tech Slack Team','Join Pule Tech Honey ','Onboarding with Marketing Team ']
     },
     {
         'name':'Marketing Department Kit',
-        'tasks':['Join Pule Tech social Media','Join Marketing slack channels Branding , social media queries , The marketing people','Pule Tech Marketing Report 2019','Set Meeting with VP Marketing']
+        'tasks':['Join Marketing slack channels','Pule Tech Marketing Report 2019','Set Meeting with VP Marketing']
     }
 ]
 
