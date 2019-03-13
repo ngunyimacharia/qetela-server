@@ -64,6 +64,9 @@ def gen_tasks(kit,tasks):
 
 def gen_onboardings():
     Kit.objects.all().delete()
+    Task.objects.all().delete()
+    Session.objects.all().delete()
+    Progress.objects.all().delete()
     for kit_choice in kit_list:
         kit = Kit(
             title = kit_choice['name'] #fake.sentence(nb_words=randint(5,10))
