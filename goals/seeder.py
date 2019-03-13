@@ -111,6 +111,7 @@ def gen_kpis(goal):
 # generate goals
 def gen_goals():
     Goal.objects.all().delete()
+    goals_list = ['Increase Quarter 1 conversion Rate by 10%','Boost Brand Awareness','Increase content Engagement ','Increase Revenue per employee by 5%','Reduce Turnover Rate of High Performers to 1 employee']
     for prev in range(2): # how many previous years to generate
         current_year = current_year=datetime.datetime.now().year - prev
         print("Generating organisation goals: "+ str(current_year))
@@ -122,7 +123,7 @@ def gen_goals():
             for _ in range(3):
                 # generate parent goals
                 goal = Goal(
-                    title=fake.sentence(),
+                    title=random.choice(goals_list),
                     description = fake.text(),
                     start = datetime.date(current_year, randint(1, 2), randint(1, 28)),
                     end = datetime.date(current_year, randint(9, 11), randint(1, 28)),
