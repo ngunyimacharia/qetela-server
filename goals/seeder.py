@@ -45,65 +45,23 @@ def gen_updates(kpi):
 
 # generate kpis
 def gen_kpis(goal):
-    metrics = [
-    "Sales Revenue",
-    "Net Profit Margin",
-    "Gross Margin",
-    "MRR (Monthly Recurring Revenue)",
-    "Net Promoter Score",
-    "Cost of Customer Acquisition (CAC)",
-    "Customer Retention Rate",
-    "Marketing qualified leads (MQL)",
-    "Sales-accepted leads (SAL)",
-    "Sales qualified leads (SQL)",
-    "Lead-to-Conversion rate",
-    "Monthly visitors",
-    "Met and Overdue Milestones",
-    "Employee Happiness",
-    "Budget variance",
-    "Capability rate",
-    "Change request cycle time",
-    "Error rate",
-    "Mean Time between failures",
-    "Story points",
-    "Turnaround time",
-    "Capability rate",
-    "Defense density",
-    "Function points",
-    "Mean time to recovery",
-    "Time to market",
-    "Experiment cycle time",
-    "Time to volume",
-    "New revenue rate",
-    "Brand advocate score",
-    "Brand recognition score",
-    "Customer satisfaction rate",
-    "Brand awareness rate",
-    "Churn rate",
-    "Customer lifetime value",
-    "Share of wallet",
-    "Cycle time",
-    "Revenue per employee",
-    "Labour productivity",
-    "Takt time",
-    "Attach rate",
-    "Contribution margin",
-    'Gross margin',
-    "Quota achievement rate",
-    "Sales volume",
-    "Share of wallet",
-    "Monthly recurring revenue",
-    "Return on investment",
-    "Net present value",
-    "Run rate"
+    kpi_list = [
+        {'metric':'Website Traffic Monthly','change':'=','target':100},
+        {'metric':'Net Promoter Score (%)','change':'=','target':70},
+        {'metric':'Traffic to Lead Ratio (%)','change':'=','target':15},
+        {'metric':'Viral Coefficient (%)','change':'=','target':20},
+        {'metric':'Mentions','change':'>','target':500},
+        {'metric':'Monthly blog visits','change':'>','target':200},
+        {'metric':'Weekly Content created','change':'=','target':40},
+        {'metric':'Weekly Content created','change':'=','target':80},
     ]
-    change_options = [">","=","<"]
     for _ in range(2):
+        kpi_choice = random.choice(kpi_list)
         kpi = Kpi(
             goal=goal,
-            metric=metrics[randint(0, len(metrics) - 1)],
-            change=change_options[randint(0, len(change_options) - 1)],
-            target=randint(0,1000000)
+            metric=kpi_choice['metric'],
+            change=kpi_choice['change'] ,
+            target=kpi_choice['target'] ,
         )
         kpi.save()
         gen_updates(kpi)
@@ -124,7 +82,7 @@ def gen_goals():
                 # generate parent goals
                 goal = Goal(
                     title=random.choice(goals_list),
-                    description = fake.text(),
+                    description = "A detailed and clear goal description is really important because it lets employees know what you want done for your goal so that you're both on the same page from the start. It also means that employees can come prepared with the correct equipment and materials for the job, ready to complete your job without any delays.",#fake.text(),
                     start = datetime.date(current_year, randint(1, 2), randint(1, 28)),
                     end = datetime.date(current_year, randint(9, 11), randint(1, 28)),
                     organisation = organisation,

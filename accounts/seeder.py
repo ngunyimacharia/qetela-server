@@ -18,16 +18,25 @@ fake.add_provider(profile)
 def gen_users():
     User.objects.all().delete()
     positions = Position.objects.all()
+    default = False
     for position in positions:
-        #create user. Ensure no duplicates
-        f_profile = fake.simple_profile()
-        while User.objects.filter(username=f_profile['username']).count():
+        #check if default user is used
+        if default == False:
+            user = User.objects.create_user("naledithuso","naledi@puletech.co.za", 'password')
+            user.first_name = "Naledi"
+            user.last_name = "Thuso"
+            user.save()
+            default = True
+        else:
+            #create user. Ensure no duplicates
             f_profile = fake.simple_profile()
+            while User.objects.filter(username=f_profile['username']).count():
+                f_profile = fake.simple_profile()
 
-        user = User.objects.create_user(f_profile['username'], f_profile['mail'], 'password')
-        user.first_name = f_profile['name'].split(' ')[0]
-        user.last_name = f_profile['name'].split(' ')[1]
-        user.save()
+            user = User.objects.create_user(f_profile['username'], f_profile['mail'], 'password')
+            user.first_name = f_profile['name'].split(' ')[0]
+            user.last_name = f_profile['name'].split(' ')[1]
+            user.save()
         #add user to organisation
         position.team.level.organisation.users.add(user)
         #add user to position
@@ -37,8 +46,3 @@ def gen_users():
                 start= datetime.date(randint(2000, 2019), randint(1, 11), randint(1, 28))
             )
         up.save()
-    # add superuser
-    su = User.objects.create_user('ngunyimacharia','ngunyimacharia@gmail.com', 'password')
-    su.first_name = 'Kelvin'
-    su.last_name = 'Ngunyi'
-    su.save()

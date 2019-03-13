@@ -10,6 +10,8 @@ def update_kpi_progress(sender, instance, created, **kwargs):
     for update in updates:
         #add progress
         kpi.current += update.progress
+        if kpi.current > kpi.target:
+            kpi.current = kpi.target
 
     #save
     kpi.save()
