@@ -119,8 +119,8 @@ def gen_goals():
 
 
                     goal = Goal(
-                        title=fake.sentence(),
-                        description = fake.text(),
+                        title=random.choice(goals_list),
+                        description = "A detailed and clear goal description is really important because it lets employees know what you want done for your goal so that you're both on the same page from the start. It also means that employees can come prepared with the correct equipment and materials for the job, ready to complete your job without any delays.",#fake.text(),
                         start = datetime.date(current_year, randint(1, 3), randint(1, 28)),
                         end = datetime.date(current_year, randint(9, 11), randint(1, 28)),
                         organisation = organisation,
@@ -150,8 +150,8 @@ def gen_goals():
 
                         #set goal
                         goal = Goal(
-                            title=fake.sentence(),
-                            description = fake.text(),
+                            title=random.choice(goals_list),
+                            description = "A detailed and clear goal description is really important because it lets employees know what you want done for your goal so that you're both on the same page from the start. It also means that employees can come prepared with the correct equipment and materials for the job, ready to complete your job without any delays.",#fake.text(),
                             start = datetime.date(current_year, randint(1, 3), randint(1, 28)),
                             end = datetime.date(current_year, randint(9, 11), randint(1, 28)),
                             organisation = organisation,
