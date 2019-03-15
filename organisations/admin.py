@@ -2,7 +2,7 @@ from django.contrib import admin
 
 #import models
 from .models import Organisation,Level,Team, Position
-
+from accounts.models import UserPosition
 
 class LevelInLine(admin.TabularInline):
     model = Level
@@ -38,10 +38,15 @@ class TeamAdmin(admin.ModelAdmin):
     list_filter = ['level','created','updated']
     inlines = [PositionInLine]
 
+class UserPositionInLine(admin.TabularInline):
+    model = UserPosition
+    extra = 3
+
 class PositionAdmin(admin.ModelAdmin):
     fields = ('title','description','team')
     list_display = ('title','team')
     list_filter = ['team','created','updated']
+    inlines = [UserPositionInLine]
 
 #add models to admin section
 admin.site.register(Organisation,OrganisationAdmin)
