@@ -6,7 +6,7 @@ from django.conf import settings
 from goals.models import Goal
 from .models import Chat,Message
 from django.contrib.auth.models import User
-from random import randint
+import random
 import sys
 # import random,datetime,pytz
 fake = Faker()
@@ -15,6 +15,8 @@ fake.add_provider(date_time)
 fake.add_provider(misc)
 
 def gen_messages(chat):
+
+    message_list = ['I need some extra hands on deck to help with the calls if we are to reach the target by month end ','Super interested in this client can I jump in on the project ?','waiting on the marketing team to send projections before we can release budget ','Major delays on the due to changes in the clients schedule','Well done team enjoyed smashing this KPI with you !','Almost there team , I need help with the final presentation due Tuesday.','Anyone great with excel? , I am stuck with some calculations ','Deadline has been shifted to next Wednesday , 2 more days to make history!','I have attached the relevent background documents here','We are ahead of schedule , well done!']
 
     if chat.team:
         #get all users in team
@@ -30,20 +32,20 @@ def gen_messages(chat):
     while len(messages) < 5:
         #get random user
         count = len(users)
-        random_index = randint(0, count - 1)
+        random_index = random.randint(0, count - 1)
         user = users[random_index]
 
         #get random reply if wanted
         reply = None
         if fake.boolean and len(messages):
             count = len(messages)
-            random_index = randint(0, count - 1)
+            random_index = random.randint(0, count - 1)
             reply = messages[random_index]
 
         #save msssage
         message = Message(
             chat=chat,
-            content = fake.paragraph(),
+            content = random.choice(message_list),
             user=user,
             parent=reply
         )
